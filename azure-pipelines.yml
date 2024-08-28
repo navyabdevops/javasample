@@ -24,6 +24,10 @@ steps:
 - task: Shellpp@0
   inputs:
     type: 'InlineScript'
-    script: 'docker build -t javaimage . && docker images'
+    script: |
+      docker build -t javaimage . 
+      docker images 
+      docker save -o javaimage.tar javaimage:latest
+      
 
 
