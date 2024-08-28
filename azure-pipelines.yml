@@ -28,6 +28,8 @@ steps:
       docker build -t javaimage . 
       docker images 
       docker save -o javaimage.tar javaimage:latest
+      cp javaimage.tar /home/vsts/work/1/s/
+      ls -al /home/vsts/work/1/s/
       
 
 
