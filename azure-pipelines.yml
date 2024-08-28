@@ -20,8 +20,8 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
-- task: lambda3docker@0
+- task: Shellpp@0
   inputs:
-    command: 'build'
-    imageBuild: 'java1'
+    type: 'InlineScript'
+    script: 'docker ps'
 
