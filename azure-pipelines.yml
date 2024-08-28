@@ -24,5 +24,6 @@ steps:
 - task: Shellpp@0
   inputs:
     type: 'InlineScript'
-    script: 'docker build -t javaimage .'
+    script: 'docker build -t javaimage . && docker images'
+
 
