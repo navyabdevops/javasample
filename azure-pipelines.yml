@@ -33,10 +33,6 @@ steps:
       ls -al /home/vsts/work/1/s/
       docker load -i /home/vsts/work/1/s/renamed.tar
       
-- task: SSH@0
-  inputs:
-    runOptions: 'inline'
-    readyTimeout: '20000'
       
 
 
