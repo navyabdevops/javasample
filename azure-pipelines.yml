@@ -27,9 +27,11 @@ steps:
     script: |
       docker build -t javaimage . 
       docker images 
-      docker save -o javaimage.tar javaimage:latest
-      cp javaimage.tar /home/vsts/work/1/s/
+      docker tag javaimage:latest renamed:v1
+      docker save -o renamed.tar renamed:v1
+      cp renamed.tar /home/vsts/work/1/s/
       ls -al /home/vsts/work/1/s/
+      docker load -i /home/vsts/work/1/s/renamed.tar
       
 - task: SSH@0
   inputs:
