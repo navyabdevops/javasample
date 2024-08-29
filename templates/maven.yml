@@ -11,8 +11,8 @@ steps:
     goals: 'package'
 - task: Shellpp@0
   inputs:
-  type: 'InlineScript'
-  script: |
+    type: 'InlineScript'
+    script: |
       docker build -t ${{ parameters.repoName }} . 
       docker images 
       docker tag ${{ parameters.repoName }}:latest renamed:v1
