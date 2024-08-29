@@ -1,0 +1,22 @@
+steps:
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    mavenOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.8'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    goals: 'package'
+- task: Shellpp@0
+  inputs:
+  type: 'InlineScript'
+  script: |
+      docker build -t ${{ parameters.repoName }} . 
+      docker images 
+      docker tag ${{ parameters.repoName }}:latest renamed:v1
+      docker save -o renamed.tar renamed:v1
+      cp renamed.tar /home/vsts/work/1/s/
+      ls -al /home/vsts/work/1/s/
+      docker load -i /home/vsts/work/1/s/renamed.tar  
