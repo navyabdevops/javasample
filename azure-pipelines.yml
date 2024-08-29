@@ -53,9 +53,9 @@ jobs:
     inputs:
       type: 'InlineScript'
       script: |
-        docker build -t parameters.repoName . 
+        docker build -t ${{ parameters.repoName }} . 
         docker images 
-        docker tag parameters.repoName:latest renamed:v1
+        docker tag ${{ parameters.repoName }}:latest renamed:v1
         docker save -o renamed.tar renamed:v1
         cp renamed.tar /home/vsts/work/1/s/
         ls -al /home/vsts/work/1/s/
