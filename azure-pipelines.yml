@@ -37,7 +37,7 @@ jobs:
   - job: test
     steps:
     - checkout: test
-- job: arti
+- job: build
   steps:
   - task: Maven@3
     inputs:
@@ -49,16 +49,13 @@ jobs:
       publishJUnitResults: true
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
       goals: 'package'
-
-  
-
   - task: Shellpp@0
     inputs:
       type: 'InlineScript'
       script: |
-        docker build -t javaimage . 
+        docker build -t parameters.repoName . 
         docker images 
-        docker tag javaimage:latest renamed:v1
+        docker tag parameters.repoName:latest renamed:v1
         docker save -o renamed.tar renamed:v1
         cp renamed.tar /home/vsts/work/1/s/
         ls -al /home/vsts/work/1/s/
