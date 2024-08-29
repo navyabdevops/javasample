@@ -33,3 +33,5 @@ jobs:
     steps:
     - checkout: ${{ parameters.repoName }}
     - template: templates/maven.yml  # Template reference
+      parameters:
+        repoName: ${{ parameters.repoName }}
