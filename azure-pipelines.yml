@@ -2,37 +2,29 @@
 # Build your Java project and run tests with Apache Maven.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
+resources:
+  repositories:
+  - repository: javasample # The name used to reference this repository in the checkout step
+    type: github
+    endpoint: navya-project
+    name: navyabdevops/javasample
+  - repository: test # The name used to reference this repository in the checkout step
+    type: github
+    endpoint: navya-project
+    name: navyabdevops/test
 
 trigger:
-- azure-pipelines
+- main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest'
 
 steps:
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'package'
+- checkout: javasample
+- checkout: test
 
 - task: Shellpp@0
   inputs:
     type: 'InlineScript'
-    script: |
-      docker build -t javaimage . 
-      docker images 
-      docker tag javaimage:latest renamed:v1
-      docker save -o renamed.tar renamed:v1
-      cp renamed.tar /home/vsts/work/1/s/
-      ls -al /home/vsts/work/1/s/
-      docker load -i /home/vsts/work/1/s/renamed.tar
-      
-      
-
+    script: 'll'
 
