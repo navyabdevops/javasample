@@ -13,18 +13,30 @@ resources:
     endpoint: navya-project
     name: navyabdevops/test
 
+parameters:
+- name: repoName
+  displayName: RepoName
+  type: string
+  default: javasample
+  values:
+  - javasample
+  - test
+
 trigger:
 - main
 
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-- checkout: javasample
-- checkout: test
+jobs:
+- ${{ if contains(parameters.repoName, 'javasample') }}:
+  - job: javasample
+    steps:
+    - script: echo Building x86...
+- ${{ if contains(parameters.repoName, 'test') }}:
+  - job: test
+    steps:
+    - script: echo Building x64...
 
-- task: Shellpp@0
-  inputs:
-    type: 'InlineScript'
-    script: 'll'
+
 
