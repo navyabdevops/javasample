@@ -27,8 +27,17 @@
       <name>Test Project Site</name>
       <url>file:///tmp/maven-project-site</url>
     </site>
+    <repository>
+       <id>maven-feed</id>
+       <url>https://pkgs.dev.azure.com/RajTechVision/_packaging/maven-feed/maven/v1</url>
+       <releases>
+          <enabled>true</enabled>
+       </releases>
+       <snapshots>
+          <enabled>true</enabled>
+       </snapshots>
+     </repository>             
   </distributionManagement>
-
   <build>
     <plugins>
       <plugin>
