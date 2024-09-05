@@ -8,23 +8,30 @@ resources:
     type: github
     endpoint: navya-project
     name: navyabdevops/javasample
-  - repository: test # The name used to reference this repository in the checkout step
+  - repository: test_artifact # The name used to reference this repository in the checkout step
     type: github
     endpoint: navya-project
     name: navyabdevops/test
 
+parameters:
+- name: repoName
+  displayName: RepoName
+  type: string
+  default: javasample
+  values:
+  - javasample
+  - test
+
 trigger:
-- main
+- none
 
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-- checkout: javasample
-- checkout: test
-
-- task: Shellpp@0
-  inputs:
-    type: 'InlineScript'
-    script: 'll'
-
+jobs:
+  - job: Build 
+    steps:
+    - checkout: ${{ parameters.repoName }}
+    - template: templates/maven.yml  # Template reference
+      parameters:
+        repoName: ${{ parameters.repoName }}
