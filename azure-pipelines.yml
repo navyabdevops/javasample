@@ -8,7 +8,7 @@ resources:
     type: github
     endpoint: navya-project
     name: navyabdevops/javasample
-  - repository: test # The name used to reference this repository in the checkout step
+  - repository: test_artifact # The name used to reference this repository in the checkout step
     type: github
     endpoint: navya-project
     name: navyabdevops/test
